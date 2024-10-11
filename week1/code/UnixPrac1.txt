@@ -1,0 +1,29 @@
+#!/bin/sh
+# Author: Bridget Smith bridget.smith24@imperial.ac.uk
+# Script: UnixPrac1.txt
+# Description: text file of a shell script analysing three .fasta files
+# Arguments: none
+# Output: data on the .fasta files
+# Uses relative paths within the directory to find data files
+# Date: Oct 2024
+
+#1 - number of lines in each .fasta file
+wc -l ../data/407228326.fasta
+wc -l ../data/407228412.fasta
+wc -l ../data/E.coli.fasta
+
+#2 - prints the genome in the E.coli.fasta file
+tail -n +2 ../data/E.coli.fasta
+
+#3 - counts the sequence lenth of the E.coli.fasta file genome
+tail -n +2 ../data/E.coli.fasta | tr -d "\n"  | wc -m 
+
+#4 - counts the number of occurenses of "ATGC" in the E.coli.fasta file genome
+tr -d "\n" < ../data/E.coli.fasta | grep -o "ATGC"  | wc -l 
+
+#5 - commputes the AT/CG ratio of each .fasta file
+AT=$(grep -o "A\|T" ../data/E.coli.fasta | wc -l) && CG=$(grep -o "C\|G" ../data/E.coli.fasta | wc -l) && ratio=$(echo "scale=2; $AT / $CG" | bc) && echo $ratio 
+AT=$(grep -o "A\|T" ../data/407228326.fasta | wc -l) && CG=$(grep -o "C\|G" ../data/407228326.fasta | wc -l)  && ratio=$(echo "scale=2; $AT / $CG" | bc) && echo $ratio
+AT=$(grep -o "A\|T" ../data/407228412.fasta | wc -l) && CG=$(grep -o "C\|G" ../data/407228412.fasta | wc -l)  && ratio=$(echo "scale=2; $AT / $CG" | bc) && echo $ratio
+
+
