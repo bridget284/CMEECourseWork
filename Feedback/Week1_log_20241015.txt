@@ -1,0 +1,599 @@
+Starting code feedback for Bridget, Week1
+
+Current Points = 100
+
+Note that: 
+(1) Major sections begin with a double "====" line 
+(2) Subsections begin with a single "====" line 
+(3) Code output or text file content are printed within single "*****" lines 
+
+======================================================================
+======================================================================
+Your Git repo size this week is about 1.56 MiB on disk 
+
+PART 1: Checking project workflow...
+
+Found the following directories in parent directory: .git, week1, Feedback
+
+Found the following files in parent directory: README.md
+
+Checking for key files in parent directory...
+
+.gitignore missing, 1 pt deducted
+
+Current Points = 99
+
+Found README in parent directory, named: README.md
+
+Printing contents of README.md:
+
+**********************************************************************
+Project name: My CMEE Coursework Repository
+Description: Coursework divided into weekly folders, MSc 2024-2025
+Languages: UNIX, bash, LaTeX, python, R studio
+Dependencies: N/A
+Instillation: Uses bash and ipython3
+Project structure: Divided by week, then into: code, data, results and sandbox
+Author name and contact: Bridget Smith bridget.smith24@imperial.ac.uk
+
+**********************************************************************
+
+======================================================================
+Looking for the weekly directories...
+
+Found 1 weekly directories: week1
+
+The Week1 directory will be assessed 
+
+======================================================================
+======================================================================
+PART 2: Checking weekly code and workflow...
+
+======================================================================
+Assessing WEEK1...
+
+Found the following directories: sandbox, data, results, code
+
+Found the following files: readme.md
+
+Checking for readme file in weekly directory...
+
+Found README in parent directory, named: readme.md
+
+Printing contents of readme.md:
+
+**********************************************************************
+Week 1 CMEE coding bootcamp
+
+This week of the course I learned about coding with Unix, LaTeX and shell scripting. I used VSCode as my code editor. The week 1 folder contains this document as a summary and four folders: code, data, results and sandbox. 
+
+The code folder contains the practical work (UnixPrac1.txt, csvtospace.sh) and class work (boilerplate.sh, ConcatinateTwoFiles.sh, CountLines.sh, MyExampleScript.sh, tabtocsv.sh, tiff2png.sh, variables.sh). 
+
+The data file contains files used when running the code, three fasta files used in Unix.Prac1.txt (407228326.fasta, 407228412.fasta, E.coli.fasta). There are three other data files which were using when running other files (1800.csv, 1800.csv.txt, spawannxs.txt). 
+
+The results folder is empty, and the sandbox folder has various files used while I was practicing coding.  
+
+**********************************************************************
+
+Results directory is empty - good! 
+
+Found 12 code files: MyExampleScript.sh, boilerplate.sh, tabtocsv.sh, tiff2png.sh, FirstBiblio.bib, UnixPrac1.txt, variables.sh, ConcatinateTwoFiles.sh, CompileLaTeX.sh, CountLines.sh, FirstExample.tex, csvtospace.sh
+
+Found the following extra files: FirstExample.pdf
+0.5 pt deducted per extra file
+
+Current Points = 98.5
+
+======================================================================
+Testing script/code files...
+
+======================================================================
+Inspecting script file MyExampleScript.sh...
+
+File contents are:
+
+**********************************************************************
+#!/bin/sh
+# Author: Bridget Smith bs2324@ic.ac.uk
+# Script: cMyExampleScriptcd.sh
+# Desc: a script which converts a .csv file to a .txt, space separated file
+# Arguments: a .csv file
+# Output: this script creates a .txt file
+# Date: Oct 2024
+
+MSG1="Hello"
+MSG2=$USER
+echo "$MSG1 $MSG2"
+echo "Hello $USER"
+echo
+**********************************************************************
+
+Testing MyExampleScript.sh...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+Hello mhasoba
+Hello mhasoba
+
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.00303s
+
+======================================================================
+Inspecting script file boilerplate.sh...
+
+File contents are:
+
+**********************************************************************
+#!/bin/bash
+# Author: Bridget Smith bs2324@ic.ac.uk
+# Script: boilerplate.sh
+# Desc: simple boilerplate for shell scripts
+# Arguments: none
+# Output: text saying "This is a shell script"
+# Date: Oct 2024
+
+echo -e "\nThis is a shell script! \n"
+
+#exit
+
+**********************************************************************
+
+Testing boilerplate.sh...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+
+This is a shell script! 
+
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.00326s
+
+======================================================================
+Inspecting script file tabtocsv.sh...
+
+File contents are:
+
+**********************************************************************
+#!/bin/sh
+# Author: Bridget Smith bridget.smith24@imperial.ac.uk
+# Script tabtocsv.sh
+# Description: substitute the tabs in the files with commas
+# Saves the output to a csv file
+# Arguments: 1 -> tab delimited file
+# Date: Oct 2024
+
+if [ $# -eq 1 ] && [ -f "$1" ]
+then
+    echo "Creating a comma delimited version of $1 ..."
+    cat $1 | tr -s "\t" "," >> $1.csv
+echo "Done!"
+else 
+    echo "Wrong number of arguments present, please use one file."
+fi
+exit
+**********************************************************************
+
+Testing tabtocsv.sh...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+Wrong number of arguments present, please use one file.
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.00370s
+
+======================================================================
+Inspecting script file tiff2png.sh...
+
+File contents are:
+
+**********************************************************************
+#!/bin/bash
+# Author: Bridget Smith bs2324@ic.ac.uk
+# Script: tiff2png.sh
+# Desc: a script which converts a tiff file to a png file
+# Arguments: a tiff file
+# Output: this script converts the tiff file to a png file
+# Date: Oct 2024
+
+for f in *.tif;
+    do 
+        echo "Converting $f";
+        convert "$f" "$(basename "$f" .tif).png";
+    done
+**********************************************************************
+
+Testing tiff2png.sh...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+Converting *.tif
+
+**********************************************************************
+
+Encountered error (or warning):
+
+***IGNORE IF THIS ERROR IS EXPECTED AS PART OF AN IN-CLASS EXERCISE***
+
+convert-im6.q16: unable to open image `*.tif': No such file or directory @ error/blob.c/OpenBlob/2964.
+convert-im6.q16: no images defined `*.png' @ error/convert.c/ConvertImageCommand/3234.
+
+======================================================================
+Inspecting script file FirstBiblio.bib...
+
+File contents are:
+
+**********************************************************************
+@article{verhulst1838notice,
+  title={Notice sur la loi que la population suit dans son accroissement},
+  author={Verhulst, Pierre-Fran{\c{c}}ois},
+  journal={Corresp. Math. Phys.},
+  volume={10},
+  pages={113--126},
+  year={1838}
+}
+**********************************************************************
+
+Testing FirstBiblio.bib...
+
+======================================================================
+Inspecting script file UnixPrac1.txt...
+
+File contents are:
+
+**********************************************************************
+#!/bin/sh
+# Author: Bridget Smith bridget.smith24@imperial.ac.uk
+# Script: UnixPrac1.txt
+# Description: text file of a shell script analysing three .fasta files
+# Arguments: none
+# Output: data on the .fasta files
+# Uses relative paths within the directory to find data files
+# Date: Oct 2024
+
+#1 - number of lines in each .fasta file
+wc -l ../data/407228326.fasta
+wc -l ../data/407228412.fasta
+wc -l ../data/E.coli.fasta
+
+#2 - prints the genome in the E.coli.fasta file
+tail -n +2 ../data/E.coli.fasta
+
+#3 - counts the sequence lenth of the E.coli.fasta file genome
+tail -n +2 ../data/E.coli.fasta | tr -d "\n"  | wc -m 
+
+#4 - counts the number of occurenses of "ATGC" in the E.coli.fasta file genome
+tr -d "\n" < ../data/E.coli.fasta | grep -o "ATGC"  | wc -l 
+
+#5 - commputes the AT/CG ratio of each .fasta file
+AT=$(grep -o "A\|T" ../data/E.coli.fasta | wc -l) && CG=$(grep -o "C\|G" ../data/E.coli.fasta | wc -l) && ratio=$(echo "scale=2; $AT / $CG" | bc) && echo $ratio 
+AT=$(grep -o "A\|T" ../data/407228326.fasta | wc -l) && CG=$(grep -o "C\|G" ../data/407228326.fasta | wc -l)  && ratio=$(echo "scale=2; $AT / $CG" | bc) && echo $ratio
+AT=$(grep -o "A\|T" ../data/407228412.fasta | wc -l) && CG=$(grep -o "C\|G" ../data/407228412.fasta | wc -l)  && ratio=$(echo "scale=2; $AT / $CG" | bc) && echo $ratio
+
+
+
+**********************************************************************
+
+Testing UnixPrac1.txt...
+
+======================================================================
+Inspecting script file variables.sh...
+
+File contents are:
+
+**********************************************************************
+#!/bin/sh
+# Author: Bridget Smith bs2324@ic.ac.uk
+# Script: variables.sh
+# Desc: a script which shows examples of variables
+# Arguments: 0 to 3 user input variables
+# Output: examples of variables
+# Date: Oct 2024
+
+# Special variables
+echo "This script was called with $# parameters"
+echo "The script's name is $0"
+echo "The first argument is $1"
+echo "the second argument is $2"
+
+# Assigned variables; explicit declaration
+MY_VAR='some string'
+echo 'the current value of the variable is:' $MY_VAR
+echo
+echo 'Please enter a new string'
+read MY_VAR
+echo 
+echo 'the current value of the variable is:' $MY_VAR
+echo
+
+# Assigned variables; reading multiple values from us
+echo 'Enter two numbers separated by space(s)'
+read a b
+echo
+echo 'you entered' $a 'and' $b '; their sum is:'
+
+# Assigned variables; command substitution
+MY_SUM=$(expr $a + $b)
+echo $MY_SUM
+
+**********************************************************************
+
+Testing variables.sh...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+This script was called with 0 parameters
+The script's name is variables.sh
+The first argument is 
+the second argument is 
+the current value of the variable is: some string
+
+Please enter a new string
+
+the current value of the variable is:
+
+Enter two numbers separated by space(s)
+
+you entered and ; their sum is:
+
+
+**********************************************************************
+
+Encountered error (or warning):
+
+***IGNORE IF THIS ERROR IS EXPECTED AS PART OF AN IN-CLASS EXERCISE***
+
+expr: syntax error: missing argument after ‘+’
+
+======================================================================
+Inspecting script file ConcatinateTwoFiles.sh...
+
+File contents are:
+
+**********************************************************************
+#!/bin/bash
+# Author: Bridget Smith bridget.smith24@imperial.ac.uk
+# Script: ConcatinateTwoFiles.sh
+# Description: .sh file which can concatinate two seperate files
+# Arguments: two files
+# Output: creates one new file
+# Date: Oct 2024
+
+if [ $# -eq 2 ] && [ -f "$1" ] && [ -f "$2" ]
+then
+    cat $1 > $3
+    cat $2 >> $3
+    echo "Merged File is"
+    cat $3
+else 
+    echo "Wrong number of arguments present, please use two files."
+fi
+**********************************************************************
+
+Testing ConcatinateTwoFiles.sh...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+Wrong number of arguments present, please use two files.
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.00350s
+
+======================================================================
+Inspecting script file CompileLaTeX.sh...
+
+File contents are:
+
+**********************************************************************
+#!/bin/bash
+pdflatex $1.tex
+bibtex $1
+pdflatex $1.tex
+pdflatex $1.tex
+evince $1.pdf &
+
+## Cleanup
+rm *.aux
+rm *.log
+rm *.bbl
+rm *.blg
+**********************************************************************
+
+Testing CompileLaTeX.sh...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(/usr/share/texlive/texmf-dist/tex/latex/tools/.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+File ignored)
+*
+! Emergency stop.
+<*> 
+    
+!  ==> Fatal error occurred, no output PDF file produced!
+Transcript written on .log.
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex)
+**********************************************************************
+
+Encountered error (or warning):
+
+***IGNORE IF THIS ERROR IS EXPECTED AS PART OF AN IN-CLASS EXERCISE***
+
+bibtex: Need exactly one file argument.
+Try `bibtex --help' for more information.
+rm: cannot remove '*.aux': No such file or directory
+rm: cannot remove '*.log': No such file or directory
+rm: cannot remove '*.bbl': No such file or directory
+rm: cannot remove '*.blg': No such file or directory
+
+(process:144455): Gtk-WARNING **: 07:29:09.088: Locale not supported by C library.
+	Using the fallback 'C' locale.
+
+(evince:144455): Gtk-WARNING **: 07:29:09.124: Theme parsing error: gtk-keys.css:1:0: Failed to import: Error opening file /snap/code/172/usr/share/themes/Default/gtk-3.0/gtk-keys.css: Permission denied
+Gtk-Message: 07:29:09.124: Failed to load module "canberra-gtk-module"
+Gtk-Message: 07:29:09.125: Failed to load module "canberra-gtk-module"
+/home/mhasoba/snap/code/common/.cache/gio-modules/libdconfsettings.so: cannot open shared object file: Permission denied
+Failed to load module: /home/mhasoba/snap/code/common/.cache/gio-modules/libdconfsettings.so
+
+** (evince:144455): WARNING **: 07:29:09.377: set_filenames: Error when getting information for file ?/home/mhasoba/Documents/Teaching/IC_CMEE/2024-25/Coursework/StudentRepos/BridgetSmith_bs2324/week1/code/.pdf?: No such file or directory
+
+======================================================================
+Inspecting script file CountLines.sh...
+
+File contents are:
+
+**********************************************************************
+#!/bin/bash
+# Author: Bridget Smith bs2324@ic.ac.uk
+# Script: CountLines.sh
+# Desc: script which counts the number of lines in a file
+# Arguments: one file
+# Output: a sentence stating the number of lines in the file
+# Date: Oct 2024
+
+NumLines="wc -l < $1"
+echo "The file $1 has $NumLines lines"
+echo
+**********************************************************************
+
+Testing CountLines.sh...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+The file  has wc -l <  lines
+
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.00397s
+
+======================================================================
+Inspecting script file FirstExample.tex...
+
+File contents are:
+
+**********************************************************************
+\documentclass[12pt]{article}
+
+\title{A Simple Document}
+
+\author{Bridget Smith}
+
+\date{October 2024}
+
+\begin{document}
+  \maketitle
+  
+  \begin{abstract}
+    This paper analyzes a seminal equation in population biology.
+  \end{abstract}
+  
+  \section{Introduction}
+    Blah Blah
+  
+  \section{Materials \& Methods}
+  
+  A foundational equation of population biology is:
+  
+  \begin{equation}
+    \frac{dN}{dt} = r N (1 - \frac{N}{K})
+  \end{equation}
+  
+  It was first proposed by Verhulst in 1838 \cite{verhulst1838notice}.
+  
+  \bibliographystyle{plain}
+  
+  \bibliography{FirstBiblio}
+
+\end{document}
+**********************************************************************
+
+Testing FirstExample.tex...
+
+======================================================================
+Inspecting script file csvtospace.sh...
+
+File contents are:
+
+**********************************************************************
+#!/bin/bash
+# Author: Bridget Smith bs2324@ic.ac.uk
+# Script: csvtospace.sh
+# Desc: a script which converts a .csv file to a .txt, space separated file
+# Arguments: a .csv file
+# Output: this script creates a .txt file
+# Date: Oct 2024
+
+if [ $# -eq 1 ] && [ -f "$1" ]
+then
+    cat $1 | tr -s "," " " >> $1.txt
+else 
+    echo "Wrong number of arguments present, please use one file."
+fi
+exit
+**********************************************************************
+
+Testing csvtospace.sh...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+Wrong number of arguments present, please use one file.
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.00413s
+
+======================================================================
+======================================================================
+Finished running scripts
+
+Ran into 3 errors
+
+======================================================================
+======================================================================
+
+FINISHED WEEKLY ASSESSMENT
+
+Current Points for the Week = 98.5
+
+NOTE THAT THESE ARE POINTS, NOT MARKS FOR THE WEEK!
