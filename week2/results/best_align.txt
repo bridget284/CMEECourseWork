@@ -1,0 +1,3 @@
+Best allignment:............['ATGCGTACCGTAACTGGAACCTGACGTAGT']
+Best score:11
+From the sequence:['AGCTTAGCGTACGTAGGCTTACGATCGGTAAGCTTGCATC']
