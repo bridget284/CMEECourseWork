@@ -1,0 +1,835 @@
+Starting testing for Bridget, Week3
+
+Note that: 
+(1) Major sections begin with a double "====" line 
+(2) Subsections begin with a single "====" line 
+(3) Code output or text file content are printed within single "*****" lines 
+
+======================================================================
+======================================================================
+Your Git repo size this week is about 2.10 MiB on disk 
+
+PART 1: Checking project workflow...
+
+Found the following directories in parent directory: .git, week1, week4, week2, Feedback, week3
+
+Found the following files in parent directory: README.md
+
+Checking for key files in parent directory...
+
+.gitignore missing!
+
+Found README in parent directory, named: README.md
+
+Printing contents of README.md:
+
+**********************************************************************
+Project name: My CMEE Coursework Repository
+Description: Coursework divided into weekly folders, MSc 2024-2025
+Languages: UNIX, bash, LaTeX, python, R studio
+Dependencies: N/A
+Instillation: Uses bash and ipython3
+Project structure: Divided by week, then into: code, data, results and sandbox
+Author name and contact: Bridget Smith bridget.smith24@imperial.ac.uk
+
+**********************************************************************
+
+======================================================================
+Looking for the weekly directories...
+
+Found 4 weekly directories: week1, week2, week3, week4
+
+The Week3 directory will be tested 
+
+======================================================================
+======================================================================
+PART 2: Checking weekly code and workflow...
+
+======================================================================
+Testing WEEK3...
+
+Found the following directories: sandbox, results, data, code
+
+Found the following files: README.md
+
+Checking for readme file in weekly directory...
+
+Found README in parent directory, named: README.md
+
+Printing contents of README.md:
+
+**********************************************************************
+# Week 3 Coursework
+
+## Description 
+This repository contains the code, data, and folder structure for Week 3 coursework, organized into separate folders for easy navigation and workflow. This work is from the "Biological Computing in R" chapter of the coding bootcamp.
+
+## Language
+R
+
+## Dependencies
+R version 4.3.3 was used when creating this files, and in R the packages tidyverse and reshape2 are required
+
+## Instillation
+install.packages("tidyverse")
+install.packages("reshape2")
+
+## Repository Structure and contents
+week3/code/ 
+Contains 14 R scripts for this week's exercises:
+apply1.R, apply2.R, basic_io.R, boilerplate.R, break.R, browse.R, control_flow.R, next.R, preallocate.R, R_conditionals.R, sample.R, TreeHeight.R, try.R, Vectorize1.R 
+
+week3/data/ 
+Contains a data file for analysis, used in basic_io.R: 
+trees.csv 
+
+week3/results/ 
+Empty folder to store output and results from scripts 
+
+week3/sandbox/ 
+Folder for experimental code and testing
+
+## Author
+Bridget Smith
+bs2324@ic.ac.uk
+
+
+**********************************************************************
+
+Results directory is empty - good! 
+
+Found 14 code files: break.R, sample.R, Vectorize1.R, R_conditionals.R, apply1.R, basic_io.R, boilerplate.R, apply2.R, try.R, control_flow.R, TreeHeight.R, next.R, browse.R, preallocate.R
+
+======================================================================
+Testing script/code files...
+
+======================================================================
+Inspecting script file break.R...
+
+File contents are:
+
+**********************************************************************
+i <- 0 #initialize i
+  while (i<Inf) {
+    if (i == 10) {
+      break
+    } else { #break out of the while loop!
+      cat("i equals ", i, " \n")
+      i <- i+1 # update i
+      }
+  }
+**********************************************************************
+
+Testing break.R...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+i equals  0  
+i equals  1  
+i equals  2  
+i equals  3  
+i equals  4  
+i equals  5  
+i equals  6  
+i equals  7  
+i equals  8  
+i equals  9  
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.11705s
+
+======================================================================
+Inspecting script file sample.R...
+
+File contents are:
+
+**********************************************************************
+###### Functions ######
+
+## A function to take a sample of size n from a population (popn) and 
+#return its mean
+myexperiment <- function(popn,n){
+  pop_sample <- sample(popn,n,replace=FALSE)
+  return(mean(pop_sample))
+}
+
+##calculate means using a for loop - no preallocation
+loopy_sample1 <- function(popn,n,num){
+  result1<-vector() # initialise empty vector of size 1
+  for(i in 1:num){
+    result1 <- c(result1, myexperiment(popn,n))
+  }
+  return(result1)
+}
+
+## To run "num" iterations of the experiment using a FOR loop on a vector with preallocation:
+loopy_sample2 <- function(popn, n, num) {
+  result2 <- vector(,num) #Preallocate expected size
+  for(i in 1:num) {
+    result2[i] <- myexperiment(popn, n)
+  }
+  return(result2)
+}
+
+## To run "num" iterations of the experiment using a FOR loop on a list with preallocation:
+loopy_sample3 <- function(popn, n, num) {
+  result3 <- vector("list", num) #Preallocate expected size
+  for(i in 1:num) {
+    result3[[i]] <- myexperiment(popn, n)
+  }
+  return(result3)
+}
+
+## To run "num" iterations of the experiment using vectorization with lapply:
+lapply_sample <- function(popn, n, num) {
+  result4 <- lapply(1:num, function(i) myexperiment(popn, n))
+  return(result4)
+}
+
+## To run "num" iterations of the experiment using vectorization with sapply:
+sapply_sample <- function(popn, n, num) {
+  result5 <- sapply(1:num, function(i) myexperiment(popn, n))
+  return(result5)
+}
+
+
+
+
+set.seed(12345)
+popn<-rnorm(10000)
+hist(popn)
+
+n<-100
+num<-10000
+
+print("Using loops without preallocation on a vector took:")
+print(system.time(loopy_sample1(popn,n,num)))
+
+print("Using loops with preallocation on a vector took:")
+print(system.time(loopy_sample2(popn,n,num)))
+
+print("Using loops with preallocation on a list took:")
+print(system.time(loopy_sample3(popn,n,num)))
+
+print("Using the vectorized sapply function (on a list) took:")
+print(system.time(sapply_sample(popn,n,num)))
+
+print("Using the vectorized lappy function (on a list) took:")
+print(system.time(lapply_sample(popn,n,num)))
+**********************************************************************
+
+Testing sample.R...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+[1] "Using loops without preallocation on a vector took:"
+   user  system elapsed 
+  0.172   0.017   0.189 
+[1] "Using loops with preallocation on a vector took:"
+   user  system elapsed 
+  0.117   0.000   0.117 
+[1] "Using loops with preallocation on a list took:"
+   user  system elapsed 
+  0.116   0.000   0.117 
+[1] "Using the vectorized sapply function (on a list) took:"
+   user  system elapsed 
+  0.117   0.000   0.117 
+[1] "Using the vectorized lappy function (on a list) took:"
+   user  syste
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.83327s
+
+======================================================================
+Inspecting script file Vectorize1.R...
+
+File contents are:
+
+**********************************************************************
+M <- matrix(runif(1000000),1000,1000)
+
+SumAllElements <- function(M) {
+  Dimentions <- dim(M)
+  Tot <- 0
+  for (i in 1:Dimentions[1]){
+    for (j in 1:Dimentions[2]){
+      Tot = Tot + M[i,j]
+    }
+  }
+  return(Tot)
+}
+
+print("Using loops, the time taken is:")
+print(system.time(SumAllElements(M)))
+print("Using the inbuilt vectorized function, the time taken is:")
+print(system.time(sum(M)))
+**********************************************************************
+
+Testing Vectorize1.R...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+[1] "Using loops, the time taken is:"
+   user  system elapsed 
+  0.031   0.000   0.031 
+[1] "Using the inbuilt vectorized function, the time taken is:"
+   user  system elapsed 
+  0.001   0.000   0.001 
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.15762s
+
+======================================================================
+Inspecting script file R_conditionals.R...
+
+File contents are:
+
+**********************************************************************
+# checks if an integer is even
+is.even <- function(n=2) {
+  if (n %% 2 ==0) {
+    return(paste(n, "is even!"))
+  } else {
+    return(paste(n, "is odd!"))
+  }
+}
+
+is.even(6)
+
+
+
+# checks if a number is a power of 2
+is.power2 <- function(n=2) {
+  if (log2(n) %% 1 ==0) {
+    return(paste(n, "is a power of 2!"))
+  } else {
+  return(paste(n, "is not a power of 2!"))
+  }
+}
+
+is.power2(4)
+
+
+
+# checks if a number is prime
+is.prime <- function(n) {
+  if (n==0) {
+    return(paste(n, "is a zero!"))
+  } else if (n==1) {
+    return(paste(n, "is just a unit!"))
+  }
+  
+  ints <- 2:(n-1)
+  
+  if (all(n%%ints!=0)) {
+    return(paste(n, "is a prime!"))
+  } else {
+    return(paste(n, "is a composite!"))
+  }
+}
+
+is.prime(3)
+
+**********************************************************************
+
+Testing R_conditionals.R...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+[1] "6 is even!"
+[1] "4 is a power of 2!"
+[1] "3 is a prime!"
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.09045s
+
+======================================================================
+Inspecting script file apply1.R...
+
+File contents are:
+
+**********************************************************************
+## Build a random matrix
+M<- matrix(rnorm(100), 10,10)
+
+##Take the mean of each row
+RowMeans <- apply(M,1,mean)
+print(RowMeans)
+
+# Now the varience
+RowVars <- apply(M,1,var)
+print(RowVars)
+
+# by column
+ColMeans <- apply(M,2,mean)
+print(ColMeans)
+**********************************************************************
+
+Testing apply1.R...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+ [1] -0.07876767 -0.01711614  0.31232501 -0.09466615 -0.13891379  0.24139792
+ [7]  0.08016232 -0.14370324  0.17522439  0.09817159
+ [1] 0.7109819 1.1842385 1.2841292 1.0084894 1.0017481 1.2320342 0.5470818
+ [8] 1.0157265 2.4236456 1.3721551
+ [1] -0.14250763  0.02365606  0.44188564  0.16327102 -0.37924121 -0.17700076
+ [7]  0.09509580  0.06104301 -0.20181255  0.54972485
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.08773s
+
+======================================================================
+Inspecting script file basic_io.R...
+
+File contents are:
+
+**********************************************************************
+# A simple script to illustrate R input-output.
+# Run line by line and check inputs outputs to understand what is happening
+
+MyData <- read.csv("../data/trees.csv", header = TRUE) #import with headers
+write.csv(MyData, "../results/MyData.csv") #write it as a new file
+write.table(MyData[1,], file = "../results/MyData.csv", append=TRUE) #append to it
+write.csv(MyData, "../results/MyData.csv", row.names=TRUE) #write row names
+write.table(MyData, "../results/MyData.csv", col.names=FALSE) #ignore column names
+print("Script complete!")
+**********************************************************************
+
+Testing basic_io.R...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+[1] "Script complete!"
+
+**********************************************************************
+
+Encountered error (or warning):
+
+***IGNORE IF THIS ERROR IS EXPECTED AS PART OF AN IN-CLASS EXERCISE***
+
+Warning message:
+In write.table(MyData[1, ], file = "../results/MyData.csv", append = TRUE) :
+  appending column names to file
+
+======================================================================
+Inspecting script file boilerplate.R...
+
+File contents are:
+
+**********************************************************************
+# a boilerplate R script
+
+MyFunction <- function(Arg1, Arg2) {
+  #statements involving arguments:
+  print(paste("Argument", as.character(Arg1), "is a", class(Arg1)))
+  print(paste("Argument", as.character(Arg2), "is a", class(Arg2)))
+  return(c(Arg1, Arg2))
+}
+
+MyFunction(1,2)
+MyFunction("Riki", "Tiki")
+**********************************************************************
+
+Testing boilerplate.R...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+[1] "Argument 1 is a numeric"
+[1] "Argument 2 is a numeric"
+[1] 1 2
+[1] "Argument Riki is a character"
+[1] "Argument Tiki is a character"
+[1] "Riki" "Tiki"
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.09925s
+
+======================================================================
+Inspecting script file apply2.R...
+
+File contents are:
+
+**********************************************************************
+SomeOperation<-function(v){ #if the sum of all components of matrix is 
+  #positive, the components are multiplied by 100, if not nothingn happens
+  if (sum(v)>0){
+    return(v*100)
+  } else{
+      return(v)
+  }
+}
+
+M <- matrix(rnorm(100),10,10)
+print(apply(M,1,SomeOperation))
+
+**********************************************************************
+
+Testing apply2.R...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+            [,1]       [,2]       [,3]       [,4]        [,5]         [,6]
+ [1,] -2.3026197 -1.1545339 -0.7964492  0.8587422  0.01852226 -0.006065602
+ [2,]  0.0135242 -0.4823266 -0.4079399 -0.9792751 -0.08991236  0.373051274
+ [3,] -0.6447283 -0.2311492  0.6451053 -0.6035737  0.35743944 -0.613236317
+ [4,] -0.4468698 -1.2293119 -1.1849628 -2.9752889  0.84622962  0.413790846
+ [5,]  0.9656608  0.6353846 -0.7928968 -1.7606640  0.69996158 -0.528362460
+ [6,] -0.9665878 -0.2834755 -0.7638179  1.8081718 -
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.10006s
+
+======================================================================
+Inspecting script file try.R...
+
+File contents are:
+
+**********************************************************************
+doit <- function(x) {
+  temp_x <- sample(x, replace = TRUE)
+  if(length(unique(temp_x)) > 30) {#only take mean if sample is large
+    print(paste("Mean of this sample was:", as.character(mean(temp_x))))
+  }
+  else{
+    stop("Couldn't calculate mean: too few unique values!")
+  }
+}
+
+
+#generate population
+set.seed(1345)
+popn <- rnorm(50)
+hist(popn)
+
+lapply(1:15, function(i) doit(popn))
+
+result <- lapply(1:15, function(i) try(doit(popn), FALSE))
+
+result <- vector("list", 15) #Preallocate/Initialize
+for(i in 1:15) {
+  result[[i]] <- try(doit(popn), FALSE)
+}
+**********************************************************************
+
+Testing try.R...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+[1] "Mean of this sample was: -0.11620822588674"
+[1] "Mean of this sample was: -0.0468516755995931"
+[1] "Mean of this sample was: -0.0890228211466614"
+[1] "Mean of this sample was: -0.124229742255296"
+
+**********************************************************************
+
+Encountered error (or warning):
+
+***IGNORE IF THIS ERROR IS EXPECTED AS PART OF AN IN-CLASS EXERCISE***
+
+Error in doit(popn) : Couldn't calculate mean: too few unique values!
+Calls: lapply -> FUN -> doit
+Execution halted
+
+======================================================================
+Inspecting script file control_flow.R...
+
+File contents are:
+
+**********************************************************************
+a <- TRUE
+if (a == TRUE) {
+  print ("a is TRUE")
+} else {
+  print ("a is FALSE")
+}
+
+
+
+for (i in 1:10) {
+  j <- i*i
+  print(paste(i, " squared is", j))
+}
+
+
+
+for(species in c("Heliodoxa rubinoides",
+                 "Boissonneaua jardini",
+                 "Sula nebouxii")){
+  print(paste("The species is", species))
+}
+
+
+
+v1 <- c("a", "bc", "def")
+for (i in v1) {
+  print(i)
+}
+
+
+
+i <- 0
+while (i<10){
+  i <- i+1
+  print(i^2)
+}
+**********************************************************************
+
+Testing control_flow.R...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+[1] "a is TRUE"
+[1] "1  squared is 1"
+[1] "2  squared is 4"
+[1] "3  squared is 9"
+[1] "4  squared is 16"
+[1] "5  squared is 25"
+[1] "6  squared is 36"
+[1] "7  squared is 49"
+[1] "8  squared is 64"
+[1] "9  squared is 81"
+[1] "10  squared is 100"
+[1] "The species is Heliodoxa rubinoides"
+[1] "The species is Boissonneaua jardini"
+[1] "The species is Sula nebouxii"
+[1] "a"
+[1] "bc"
+[1] "def"
+[1] 1
+[1] 4
+[1] 9
+[1] 16
+[1] 25
+[1] 36
+[1] 49
+[1] 64
+[1] 81
+[1] 100
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.11010s
+
+======================================================================
+Inspecting script file TreeHeight.R...
+
+File contents are:
+
+**********************************************************************
+# This function calculates heights of trees given distance of each tree 
+# from its base and angle to its top, using  the trigonometric formula 
+#
+# height = distance * tan(radians)
+#
+# ARGUMENTS
+# degrees:   The angle of elevation of tree
+# distance:  The distance from base of tree (e.g., meters)
+#
+# OUTPUT
+# The heights of the tree, same units as "distance"
+
+TreeHeight <- function(degrees, distance) {
+  radians <- degrees * pi / 180
+  height <- distance * tan(radians)
+  print(paste("Tree height is:", height))
+  
+  return (height)
+}
+
+TreeHeight(37, 40)
+**********************************************************************
+
+Testing TreeHeight.R...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+[1] "Tree height is: 30.1421620041118"
+[1] 30.14216
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.08958s
+
+======================================================================
+Inspecting script file next.R...
+
+File contents are:
+
+**********************************************************************
+for (i in 1:10) {
+  if ((i %% 2) == 0) # check if the number is odd
+    next # pass to the next iteration of loop
+  print(i)
+}
+**********************************************************************
+
+Testing next.R...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+[1] 1
+[1] 3
+[1] 5
+[1] 7
+[1] 9
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.09785s
+
+======================================================================
+Inspecting script file browse.R...
+
+File contents are:
+
+**********************************************************************
+Exponential <- function(N0=1,r=1,generations=10){
+  #runs a simulation of exponential growth
+  #returns a vector of length generations
+  
+  N<-rep(NA, generations) #creates a vector
+  
+  N[1]<-N0
+  for (t in 2:generations){
+    N[t] <- N[t-1]*exp(r)
+    browser()
+  }
+  return(N)
+}
+plot(Exponential(), type="l", main="Exponential growth")
+**********************************************************************
+
+Testing browse.R...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+Called from: Exponential()
+debug: N[t] <- N[t - 1] * exp(r)
+debug: browser()
+debug: N[t] <- N[t - 1] * exp(r)
+debug: browser()
+debug: N[t] <- N[t - 1] * exp(r)
+debug: browser()
+debug: N[t] <- N[t - 1] * exp(r)
+debug: browser()
+debug: N[t] <- N[t - 1] * exp(r)
+debug: browser()
+debug: N[t] <- N[t - 1] * exp(r)
+debug: browser()
+debug: N[t] <- N[t - 1] * exp(r)
+debug: browser()
+debug: N[t] <- N[t - 1] * exp(r)
+debug: browser()
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.12875s
+
+======================================================================
+Inspecting script file preallocate.R...
+
+File contents are:
+
+**********************************************************************
+NoPreallocFun <- function(x){
+  a<-vector()
+  for (i in 1:x) {
+    a <- c(a,i)
+  }
+}
+print(system.time(NoPreallocFun(1000)))
+
+
+
+PreallocFun <- function(x){
+  a<-rep(NA,x)
+  for(i in 1:x){
+    a[i] <- i
+  }
+}
+print(system.time(PreallocFun(1000)))
+
+**********************************************************************
+
+Testing preallocate.R...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+   user  system elapsed 
+  0.008   0.002   0.009 
+   user  system elapsed 
+  0.001   0.000   0.002 
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.12170s
+
+======================================================================
+======================================================================
+Finished running scripts
+
+Ran into 2 errors
+
+======================================================================
+======================================================================
+
+FINISHED LOGGING
+
