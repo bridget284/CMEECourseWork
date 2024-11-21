@@ -1,0 +1,45 @@
+HOW TO HPC
+
+open ssh (for talking to the computer, running things, using cat etc, use exit to leave):
+ssh bs2324@login.hpc.imperial.ac.uk
+
+open stfp (moving files between local and remote - using put or get filename.R):
+sftp bs2324@login.hpc.imperial.ac.uk
+
+to run the sim:
+qsub -J 1-32 run_script.sh  (1-32 is the number of clusters)
+
+check on the sim:
+qstat
+
+to remove error/output files:
+rm run_script.sh.*
+
+to check out error files, can use wc -l run_script.sh.e* to check if the line count is the same in all
+
+
+
+
+
+
+example runscript:
+#!/bin/bash
+#PBS -l walltime=12:00:00
+#PBS -l select=1:ncpus=1:mem=1gb
+
+module load anaconda3/personal
+
+echo "R is about to run"
+
+cp $HOME/bs2324_HPC_2024_demographic_cluster.R $TMPDIR # move file from home to temp
+
+cp $HOME/bs2324_HPC_2024_main.R $TMPDIR
+
+cp $HOME/Demographic.R $TMPDIR
+
+R --vanilla < $TMPDIR/bs2324_HPC_2024_demographic_cluster.R # run file in temp
+
+mv $TMPDIR/output_* $HOME/output_files/ # save output files to home
+
+echo "R has finished running"
+

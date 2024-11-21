@@ -1,0 +1,34 @@
+Day 1 
+
+History
+-1842: difference engine: zero energy use, FLOPS(floating point per second):1, babbage machine
+-Tianhe-2 was the fastest computer until 2015, build in 2013, used 24Mw, FLOPS: 4x10^15
+- Nvidia Blackwell B200 GPU - fasters processor - FLOPS:2x10^16, space: 16ch^2, energy use:1,200Kw
+
+LECTURE 1 - PARALLEL COMPUTING
+Objectives - run code in parallel and process data produced, build simulations of populations and communities
+
+HPC: 
+Traditionally supercomputers and clusters, nowadays it means using a parallel system can take forms: single computer with many processors, a cluster of many ordinary computers, many computers which access a shared memory
+Parallel computing: several processors working at once
+Example: counting sheep, split up the picture and each computer can count the sheep in their section then report the answers back and combine. 
+
+Some tasks are great for this eg 3D computer graphics, simulations with different parameters, stochastic simulations - run some on each computer and find average, tasks needing lots of memory can use clusters, tasks which can be automated, there is always trade-off as the process of getting jobs set up on the cluster takes time
+
+Not all tasks this is helpful eg serial tasks eg fluid dynamics simulations as fluid can move between sections.
+GPU - graphics processing unit 
+
+How to manage files:
+When logged into SSH (secure shell) you can navigate around your remote area, need SCP or SFTP to transfer files between local and remote
+
+How to run jobs:
+adapt code to run on cluster (parallise it) as.numeric(Sys.getenv("PBS_ARRAY_INDEX")), save output with i (parameter i) in filename so you get multiple outputs otherwise the last to finish will overwrite the other outputs. Test code locally for time and memory limits.
+
+Random numbers in R
+Can set seed to get a repeated order of random numbers using set.seed(1) (pseudorandom numbers) - useful for parallel simulations as you can set different seeds for each parallel task
+
+Data storage:
+$Home goes to $TMPDIR (temporary) then I move it back
+
+
+
