@@ -6,6 +6,12 @@
 # Output: this script converts the tiff file to a png file
 # Date: Oct 2024
 
+if ! command -v convert &> /dev/null
+then
+    echo "ImageMagick's 'convert' command could not be found. Please install ImageMagick to use this script."
+    exit 1
+fi
+
 for f in *.tif;
     do 
         echo "Converting $f";

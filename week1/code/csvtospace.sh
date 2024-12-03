@@ -6,10 +6,21 @@
 # Output: this script creates a .txt file
 # Date: Oct 2024
 
-if [ $# -eq 1 ] && [ -f "$1" ]
+# check if output file exists, if it does then exit
+if [ -f "$1.txt" ] 
 then
+    echo "Error: The file '$1.txt' already exists."
+    echo "Please remove it or rename it before running this script."
+    exit 1
+fi
+
+# check there is a single input and that it is a file
+if [ $# -eq 1 ] && [ -f "$1" ] 
+then
+    # change any commas to spaces
     cat $1 | tr -s "," " " >> $1.txt
 else 
+    # if the inputs are wrong, let the user know and exit
     echo "Wrong number of arguments present, please use one file."
 fi
 exit

@@ -14,12 +14,12 @@ echo "the second argument is $2"
 
 # Assigned variables; explicit declaration
 MY_VAR='some string'
-echo 'the current value of the variable is:' $MY_VAR
+echo 'the current value of the variable is:' "$MY_VAR"
 echo
 echo 'Please enter a new string'
 read MY_VAR
 echo 
-echo 'the current value of the variable is:' $MY_VAR
+echo 'the current value of the variable is:' "$MY_VAR"
 echo
 
 # Assigned variables; reading multiple values from us
@@ -29,5 +29,5 @@ echo
 echo 'you entered' $a 'and' $b '; their sum is:'
 
 # Assigned variables; command substitution
-MY_SUM=$(expr $a + $b)
+MY_SUM=$(($a + $b))
 echo $MY_SUM
