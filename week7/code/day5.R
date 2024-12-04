@@ -25,9 +25,11 @@ pheno$Date<-as.Date(pheno$Date, format = "%d/%m/%Y")
 silweather$Date<-as.Date(silweather$Date, format = "%d/%m/%Y")
 
 names(silweather)[7]<-"AirMin"
-silweather <- silweather %>% filter(AirMin >= -20)
 
 require(dplyr)
+silweather <- silweather %>% filter(AirMin >= -20)
+
+
 
 # Function to calculate weekly average of Air_Temp_Min...Deg.C...Min for each date in pheno
 get_weekly_avg <- function(date) {

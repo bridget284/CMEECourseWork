@@ -1,14 +1,14 @@
-## Build a random matrix
+# build a random matrix
 M<- matrix(rnorm(100), 10,10)
 
-##Take the mean of each row
+# return the mean of each row
 RowMeans <- apply(M,1,mean)
 print(RowMeans)
 
-# Now the varience
+# return the variance of each row
 RowVars <- apply(M,1,var)
 print(RowVars)
 
-# by column
+# return the mean of each column
 ColMeans <- apply(M,2,mean)
 print(ColMeans)

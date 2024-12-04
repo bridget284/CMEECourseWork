@@ -51,25 +51,10 @@ colSums(is.na(data))
 data<-na.omit(data)
 
 
-   
+  
 
-
-
-
-
-
-#require(usdm)
-#require(psych)
-#require(lmerTest)
-#require(sjPlot)
-#vif(data[,-c(1,2,3,4,5)]) # should remove soil temp 2
-#vif(data[,-c(1,2,3,4,5,8)]) # should remove grass temp max
-#vif(data[,-c(1,2,3,4,5,8,12)]) # should remove air temp
-#vif(data[,-c(1,2,3,4,5,6,8,12)]) # should remove soil temp 4
-vif(data[,-c(1,2,3,4,5,6,8,9,12)]) # all under 2
-
-
-#data2<-data[c(1,4,7,10,11,13,14)]
+# new data set with only relevent columns
+data2<-data[c(1,4,7,10,11,13,14)]
 
 # renaming columns
 names(data2)[3]<-"GrassTemp"

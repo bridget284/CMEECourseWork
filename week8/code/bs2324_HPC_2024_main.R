@@ -68,11 +68,11 @@ question_1 <- function(){
   
   # make and save a graph
   index_vector <- seq(1, nrow(population))
-  png(filename="question_1.png", width = 600, height = 400)
+  png(filename="../results/question_1.png", width = 600, height = 400)
   #plot(index_vector, population)
   # Plot the first column as a line
   plot(index_vector, population[, 1], type = "l", col = "blue", lwd = 2, 
-       xlab = "Time", ylab = "Population Size", main = "Population Size over Time")
+       xlab = "Time", ylab = "Population Size")
   
   # Add the second column as another line
   lines(index_vector, population[, 2], col = "red", lwd = 2)
@@ -118,11 +118,11 @@ question_2 <- function(){
   
   # make and save a graph
   index_vector <- seq(1, nrow(population))
-  png(filename="question_2.png", width = 600, height = 400)
+  png(filename="../results/question_2.png", width = 600, height = 400)
   #plot(index_vector, population)
   # Plot the first column as a line
   plot(index_vector, population[, 1], type = "l", col = "blue", lwd = 2, 
-       xlab = "Time", ylab = "Population Size", main = "Population Size over Time")
+       xlab = "Time", ylab = "Population Size")
   
   # Add the second column as another line
   lines(index_vector, population[, 2], col = "red", lwd = 2)
@@ -189,7 +189,7 @@ question_5 <- function(){
   )
   
   # plot graph
-  png(filename="question_5.png", width = 600, height = 400)
+  png(filename="../results/question_5.png", width = 600, height = 400)
   require(ggplot2)
   ggplot(data, aes(x=name, y=value)) + 
     geom_bar(stat = "identity", fill = "darkblue") +
@@ -208,12 +208,91 @@ question_5 <- function(){
 # Question 6
 question_6 <- function(){
   
-  png(filename="question_6", width = 600, height = 400)
-  # plot your graph here
+  # source other files
+  source("Demographic.R")
+  
+  
+  
+  
+  ### find stochastic results
+  # create list 
+  results<-list()
+  
+  # read in data, into a list of 15000 simulations of 121 values
+  for (i in 51:100) {
+    filename <- paste0("/home/bridget-smith/Documents/CMEECourseWork/week8/data/output_", i, ".rda")
+    load(filename)
+    results<-append(results, population)
+  }
+  
+  # find average population for each time step for the two ICs of stochastic simulations
+  large_stoch<-rep(0,121)
+  for (i in 1:3750){
+    large_stoch <- large_stoch + results[[i]]
+  }
+  large_stoch <- large_stoch/3750
+  
+  small_stoch<-rep(0,121)
+  for (i in 3751:7500){
+    small_stoch <- small_stoch + results[[i]]
+  }
+  small_stoch <- small_stoch/3750
+  
+  
+  
+  
+  ### find deterministic results
+  # find population for each time step for the two ICs of deterministic simulations
+  growth_matrix <- matrix(c(0.1,0.0,0.0,0.0, # growth matrix
+                            0.5,0.4,0.0,0.0,
+                            0.0,0.4,0.7,0.0,
+                            0.0,0.0,0.25,0.4),
+                          nrow=4, ncol=4, byrow = T)
+  reproduction_matrix<-matrix(c(0.0,0.0,0.0,2.6, # reproduction matrix
+                                0.0,0.0,0.0,0.0,
+                                0.0,0.0,0.0,0.0,
+                                0.0,0.0,0.0,0.0),
+                              nrow=4, ncol=4, byrow=T)
+  projection_matrix = reproduction_matrix + growth_matrix # projection matrix
+  
+  # set up initial values
+  simulation_length = 120
+  initial_state = state_initialise_spread(4,100)
+  
+  # run simulation and record population sizes
+  large_det <- deterministic_simulation(initial_state,projection_matrix,simulation_length)
+  
+  # run simulation for second ICs
+  initial_state = state_initialise_spread(4,10)
+  small_det<- deterministic_simulation(initial_state,projection_matrix,simulation_length)
+  
+  
+  
+  
+  ### find deviation between stochasic and deterministic results, and plot
+  large_final <- large_stoch/large_det
+  small_final <- small_stoch/small_det
+  
+  index_vector <- seq(1, 121)
+  
+  # create png file
+  png(filename="../results/question_6.png", width = 600, height = 400)
+  
+  # Plot the first column as a line
+  plot(index_vector, small_final, type = "l", col = "red", lwd = 2, 
+       xlab = "Time", ylab = "Deviation", main = "Stochastic and Deterministic Simulation Deviation")
+  
+  # Add the second column as another line
+  lines(index_vector, large_final, col = "blue", lwd = 2)
+  
+  # Add a legend for clarity
+  legend("bottomright", legend = c("Large Population", "Small Population"), col = c("blue", "red"), lwd = 2, bty="n")
+
+  # close png
   Sys.sleep(0.1)
   dev.off()
   
-  return("type your written answer here")
+  return("It is more approriate to approximate the average behaviour of this stochastic simulation with a large population, as there is a much smaller deviation from the deterministic model when a large population is modelled.")
 }
 
 
@@ -221,65 +300,119 @@ question_6 <- function(){
 
 # Question 7
 species_richness <- function(community){
-  
+  output <- length(unique(community))
+  return(output)
 }
 
 # Question 8
 init_community_max <- function(size){
-  
+  initial_state <- seq(from = 1, to = size)
+  return(initial_state)
 }
 
 # Question 9
 init_community_min <- function(size){
-  
+  initial_state <- rep(1, size)
+  return(initial_state)
 }
 
 # Question 10
 choose_two <- function(max_value){
-  
+  vector <- seq(from=1, to=max_value)
+  output <- sample(vector, 2, replace=FALSE)
+  return(output)
 }
 
 # Question 11
-neutral_step <- function(community){
-  
+neutral_step <- function(community){ # replace one individual with 'offspring' of another
+  choice <- choose_two(length(community))
+  community[choice[2]] <- community[choice[1]]
+  return(community)
 }
 
 # Question 12
 neutral_generation <- function(community){
+  if (length(community) %% 2 ==0){ # if there is an even number of individuals, divide by 2
+    len <- length(community)/2
+  } else { # if there is an odd number of individuals, 50-50 probability of rounding up (always rounded up but 50% chance of -1 after)
+    len <- round(length(community)/2)
+    rand <- sample(c(0, -1), size = 1, prob = c(0.5, 0.5))
+    len <- len + rand
+  }
   
+  for (i in 1:len){
+   community <- neutral_step(community)
+  }
+  return(community)
 }
 
 # Question 13
 neutral_time_series <- function(community,duration)  {
-  
+  richness_series <- rep(0,duration+1)
+  richness_series[1] <- species_richness(community)
+  for (i in 1:duration){
+    community <- neutral_generation(community)
+    richness_series[i+1] <- species_richness(community)
+  }
+  return(richness_series)
 }
 
 # Question 14
-question_8 <- function() {
+question_14 <- function() {
+  community <- init_community_max(100)
+  duration = 200
+  richness_series <- neutral_time_series(community, duration)
+  index_vector <- seq(1, duration + 1)
   
-  
-  
-  png(filename="question_14", width = 600, height = 400)
-  # plot your graph here
+  # create png file and plot graph
+  png(filename="../results/question_14.png", width = 600, height = 400)
+  plot(index_vector, richness_series, type = "l", col = "purple", lwd = 2, 
+       xlab = "Generation", ylab = "Species Richness")
   Sys.sleep(0.1)
   dev.off()
   
-  return("type your written answer here")
+  return("The system will always eventually converge to a species richness of 1.
+         This is because there is no way of species being introduced in this model so they will always die out eventually until one species is left.")
 }
 
 # Question 15
 neutral_step_speciation <- function(community,speciation_rate)  {
-  
+  rand <- sample(c(0, 1), size = 1, prob = c(speciation_rate, 1 - speciation_rate))
+  choice <- choose_two(length(community))
+  if (rand == 1){
+    community[choice[2]] <- community[choice[1]]  
+  } else {
+    new_species <- max(community) +1
+    community[choice[2]] <- new_species
+  }
+  return(community)
 }
 
 # Question 16
 neutral_generation_speciation <- function(community,speciation_rate)  {
+  if (length(community) %% 2 ==0){ # if there is an even number of individuals, divide by 2
+    len <- length(community)/2
+  } else { # if there is an odd number of individuals, 50-50 probability of rounding up (always rounded up but 50% chance of -1 after)
+    len <- round(length(community)/2)
+    rand <- sample(c(0, -1), size = 1, prob = c(0.5, 0.5))
+    len <- len + rand
+  }
   
+  for (i in 1:len){
+    community <- neutral_step_speciation(community, speciation_rate)
+  }
+  return(community)
 }
 
 # Question 17
 neutral_time_series_speciation <- function(community,speciation_rate,duration)  {
-  
+  richness_series <- rep(0,duration+1)
+  richness_series[1] <- species_richness(community)
+  for (i in 1:duration){
+    community <- neutral_generation_speciation(community, speciation_rate)
+    richness_series[i+1] <- species_richness(community)
+  }
+  return(richness_series)
 }
 
 # Question 18

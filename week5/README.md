@@ -2,6 +2,8 @@
 
 ## Description 
 This repository contains the code, data, and folder structure for Week 5 coursework, organized into separate folders for easy navigation and workflow. This work is from week 1 of Stats in R.
+In this week I covered: T-tests, covariance and correlation, simple linear models, simple linear models with multiple explanatory variables, and analysis of variance.
+Day 5 was a catch up day to look at the theory of the content being taught so there is not a code file for this day.
 
 ## Language
 R
@@ -15,7 +17,7 @@ install.packages("dplyr")
 
 ## Repository Structure
 week5/code/
-Contains day1.R, day2.R, day3.R, day4.R.
+Contains day1.R, day2.R, day3.R, day4.R. 
 
 week5/data/ 
 Contains SparrowSize.txt used in day1.R

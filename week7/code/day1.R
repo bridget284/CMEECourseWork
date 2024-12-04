@@ -21,7 +21,7 @@ species_counts <- table(trees$species)
 species_counts
 
 hist(girth$Girth_cm)
-boxplot(girth$HeightGirth_cm)
+#boxplot(girth$HeightGirth_cm)
 table(girth$Estimated)
 class(girth$Girth_cm)
 

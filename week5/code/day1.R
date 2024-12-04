@@ -2,7 +2,6 @@
 myNumericVector <- c(1.3,2.5,1.9,3.4,5.6,1.4,3.1,2.9)
 str(myNumericVector)
 
-install.packages("lme4")
 require(lme4)
 d<-read.table("../data/SparrowSize.txt", header=TRUE)
 str(d)

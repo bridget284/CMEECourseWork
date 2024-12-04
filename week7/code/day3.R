@@ -121,6 +121,7 @@ for (i in 1:nrow(data2)) {
 }
 
 # Remove rows where month is "03"
+require(dplyr)
 data2 <- data2 %>% filter(month != "03")
 
 # plots
