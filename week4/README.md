@@ -13,9 +13,9 @@ R version 4.3.3 was used when creating this files, and in R the package dplyr is
 The LaTeX package used is: graphicx
 
 ## Instillation
-# R
+### R
 install.packages("dplyr")
-# LaTeX
+### LaTeX
 \usepackage{graphicx} 
 
 ## Repository Structure

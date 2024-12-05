@@ -12,12 +12,12 @@ R version 4.3.3 was used when creating this files, and in R the packages ggplot2
 The LaTeX packages needed are: graphicx, geometry, nopageno, amsmath, float
 
 ## Instilation
-# R
+### R
 install.packages("ggplot2")
 install.packages("ggpubr")
 install.packages("dpylr")
 
-# LaTeX
+### LaTeX
 \usepackage{graphicx} 
 \usepackage[a4paper, total={6.3in, 9.7in}]{geometry}
 \usepackage{nopageno}

@@ -19,7 +19,7 @@ ipython 8.20.0 was used when creating these files, 6 python packages are needed 
 Jupyter Notebook
 
 ## Instillation
-# R
+### R
 install.packages("tidyverse")
 install.packages("reshape2")
 install.packages("lme4")
@@ -36,14 +36,14 @@ install.packages("sf")
 install.packages("units")
 install.packages("geodata")
 install.packages("openxlsx")
-# python
+### python
 import subprocess
 import csv
 import pickle 
 import sys
 import doctest
 import ipdb
-# jupyter 
+### jupyter 
 pip install jupyter
 
 ## Repository Structure

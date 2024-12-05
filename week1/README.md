@@ -51,6 +51,6 @@ Empty folder to store output and results from scripts
 ### Sandbox Folder
 Folder for experimental code and testing
 
-### Author
+## Author
 Bridget Smith
 bs2324@ic.ac.uk
