@@ -2,6 +2,7 @@
 
 """Some functions exemplifying the use of control statements"""
 
+__appname__ = "[test_control_flow.py]"
 __author__ = "Bridget Smith (bridget.smith24@imperial.ac.uk)"
 __version__ = "0.0.1"
 
@@ -28,6 +29,8 @@ def even_or_odd(x=0):
     return f"{x} is Odd!"
 
 def main(argv): 
+    """The main function that demonstrates the use of the `even_or_odd` function
+    by printing results for two numbers."""
     print(even_or_odd(22))
     print(even_or_odd(33))
     return 0

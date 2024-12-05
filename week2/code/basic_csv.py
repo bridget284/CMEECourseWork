@@ -1,3 +1,12 @@
+#!/Bridget/bin/env python3
+
+"""Reading and writing CSV files"""
+
+__appname__ = "[basic_csv.py]"
+__author__ = "Bridget Smith (bridget.smith24@imperial.ac.uk)"
+__version__ = "0.0.1"
+
+# imports
 import csv
 
 # Read a file containing:

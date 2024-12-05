@@ -1,5 +1,12 @@
-#!/usr/bin/env python3
-# Filename: using_name.py
+#!/Bridget/bin/env python3
+
+"""A script using the special variable __name__"""
+
+__appname__ = "[using_name.py]"
+__author__ = "Bridget Smith (bridget.smith24@imperial.ac.uk)"
+__version__ = "0.0.1"
+
+
 
 if __name__ == "__main__":
     print("This program is being run by itself!")

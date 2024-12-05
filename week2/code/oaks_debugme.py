@@ -7,6 +7,7 @@ script contains a doctest to test if some example inputs are oaks"""
 __appname__ = "[oaks_debugme.py]"
 __author__ = "Bridget Smith (bridget.smith24@imperial.ac.uk)"
 __version__ = "0.0.1"
+
 #imports
 import csv
 import sys
@@ -39,6 +40,8 @@ def is_an_oak(name):
 #main function - opens a csv file of species and runs them through the is_an_oak function
 # writes a csv file into the results folder containing the oak species
 def main(argv): 
+    """The main function that demonstrates the use of the is_an_oak function
+    by writing the results of TestOaksDtat.csv into JustOaksData.csv."""
     f = open("../data/TestOaksData.csv",'r')
     g = open('../results/JustOaksData.csv','w')
     taxa = csv.reader(f)

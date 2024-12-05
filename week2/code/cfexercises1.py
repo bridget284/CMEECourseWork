@@ -78,6 +78,8 @@ def foo_6(x=5):
 
 # Arguments to run when the code is run through main
 def main(argv):
+    """The main function that demonstrates the use of the foo_* functions
+    by printing results for two inputs for each for the 6 functions."""
     print(foo_1(9))
     print(foo_1(16))
     print(foo_2(2, 4))

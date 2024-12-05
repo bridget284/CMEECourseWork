@@ -16,8 +16,6 @@ popn <- rnorm(50)
 hist(popn)
 
 # run the doit function 15 times from the population popn
-lapply(1:15, function(i) doit(popn))
-
 result <- lapply(1:15, function(i) try(doit(popn), FALSE))
 
 result <- vector("list", 15) # Preallocate/Initialize

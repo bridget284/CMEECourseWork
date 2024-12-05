@@ -1,3 +1,10 @@
+#!/Bridget/bin/env python3
+
+"""Reading and writing files using pickle"""
+
+__appname__ = "[basic_io3.py]"
+__author__ = "Bridget Smith (bridget.smith24@imperial.ac.uk)"
+__version__ = "0.0.1"
 #############################
 # STORING OBJECTS
 #############################
