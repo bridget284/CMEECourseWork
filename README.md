@@ -12,9 +12,9 @@ jupyter notebook
 LaTeX
 
 ## Dependencies
-R version 4.3.3 was used when creating this files, and in R the packages tidyverse and reshape2 are required.
+R version 4.3.3 was used when creating this files, 16 R packages are needed for the copde in this repository, with instillation instructions for them below. 
 
-ipython 8.20.0 was used when creating these files, and in python the package subprocess is required.
+ipython 8.20.0 was used when creating these files, 6 python packages are needed for the copde in this repository, with instillation instructions for them below. 
 
 Jupyter Notebook
 
@@ -22,8 +22,27 @@ Jupyter Notebook
 # R
 install.packages("tidyverse")
 install.packages("reshape2")
+install.packages("lme4")
+install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("MASS")
+install.packages("ggpubr")
+install.packages("lmtest")
+install.packages("usdm")
+install.packages("lmerTest")
+install.packages("psych")
+install.packages("terra")
+install.packages("sf")
+install.packages("units")
+install.packages("geodata")
+install.packages("openxlsx")
 # python
 import subprocess
+import csv
+import pickle 
+import sys
+import doctest
+import ipdb
 # jupyter 
 pip install jupyter
 
